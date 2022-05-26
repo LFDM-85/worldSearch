@@ -1,0 +1,13 @@
+label {
+  color: White;
+  font-size: 2rem;
+}
+
+select {
+  padding: 16px 20px;
+  border: none;
+  background-color: transparent;
+  color: black;
+  font-size: 1rem;
+  text-align: center;
+}

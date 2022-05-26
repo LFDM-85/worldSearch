@@ -1,10 +1,17 @@
 import React from "react";
 import "./App.css";
+import SearchPage from "./components/pages/SearchPage/SearchPage";
+import SideBar from "./components/pages/SideBar/SideBar";
 
 function App() {
   return (
     <div className="App">
-      <h1>World Search</h1>
+      <div className="sidebar">
+        <SideBar />
+      </div>
+      <div>
+        <SearchPage />
+      </div>
     </div>
   );
 }

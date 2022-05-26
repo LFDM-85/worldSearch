@@ -1,0 +1,29 @@
+.search {
+  color: white;
+  font-size: 2em;
+}
+
+.input {
+  border: none;
+  -webkit-appearance: none;
+  -ms-apperance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  padding: 20px;
+  font-size: 3em;
+  text-align: center;
+  color: white;
+  /* border: white; */
+  border-bottom: 2px solid white;
+  outline: none;
+  width: 50%;
+}
+
+.input::placeholder {
+  font-size: 0.75em;
+}
+
+.input:focus::placeholder {
+  color: transparent;
+}
