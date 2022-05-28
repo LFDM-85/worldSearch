@@ -9,7 +9,7 @@ function App() {
       <div className="sidebar">
         <SideBar />
       </div>
-      <div>
+      <div className="searchpage">
         <SearchPage />
       </div>
     </div>

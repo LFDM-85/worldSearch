@@ -4,10 +4,8 @@ const Dropdown = () => {
   return (
     <div>
       <label htmlFor="continents">Select Continent:</label>
-      <select name="continents" id="continents">
-        <option value="all" selected>
-          All
-        </option>
+      <select name="continents" id="continents" defaultValue="all">
+        <option value="all">All</option>
         <option value="africa">Africa</option>
         <option value="antarctica">Antarctica</option>
         <option value="asia">Asia</option>

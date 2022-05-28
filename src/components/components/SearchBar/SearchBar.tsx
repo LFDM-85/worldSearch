@@ -1,40 +1,28 @@
+import { useState } from "react";
+
 import "./SearchBar.css";
-import useSearch from "../../hooks/use-search";
 
 // TODO
-// Continent validation
 // view correct types
 
 const SearchPage = () => {
-  const {
-    value: enteredContinent,
-    isValid: enteredContinentIsValid,
-    // hasError: enteredContinentHasError,
-    valueChangeHandler: searchContinentHandler,
-    reset: resetInput,
-  } = useSearch((value: string) => value.trim() !== "");
+  const [searchValue, setSearchValue] = useState("");
 
-  const formSubmitHandler = (event: any) => {
-    event.preventDefault();
-
-    if (!enteredContinentIsValid) {
-      return;
-    }
-
-    console.log(enteredContinent);
-
-    resetInput();
+  const searchValueHandler = (event: any) => {
+    setSearchValue(() => event.target.value);
   };
+
+  console.log(searchValue);
 
   return (
     <div>
-      <form onSubmit={formSubmitHandler}>
+      <form>
         <input
           type="text"
           className="input"
           placeholder="Type A Country"
-          onChange={searchContinentHandler}
-          value={enteredContinent}
+          onChange={searchValueHandler}
+          value={searchValue}
         />
         {/* {!enteredContinentHasError && <p>Wrong Continent Name</p>} */}
       </form>

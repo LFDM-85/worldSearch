@@ -16,7 +16,7 @@ const SearchPage = () => {
             <CountryCard
               flag={country.flags.png}
               countryname={country.name.common}
-              key={country.population}
+              key={Math.random()}
             />
           );
         })}

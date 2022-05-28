@@ -4,7 +4,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 const SideBar = () => {
   return (
     <div>
-      <h1>Favorits</h1>
+      <h1>Favorites</h1>
       <div className="fav-searchbar">
         <SearchBar />
       </div>

@@ -4,8 +4,8 @@ const CountryCard = (props: any) => {
   return (
     <div className="countrycard">
       <img className="countryflag" src={props.flag} alt="flag" />
-      <p>{props.countryname}</p>
-      <button>Add to Favorits</button>
+      <p className="countryNameCard">{props.countryname}</p>
+      <button className="addcountryfavorite">Add to Favorites</button>
     </div>
   );
 };

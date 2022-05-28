@@ -5,6 +5,7 @@
 
 .listcountry {
   margin-top: 80px;
+  margin-left: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;

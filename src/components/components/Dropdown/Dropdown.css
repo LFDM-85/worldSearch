@@ -4,10 +4,15 @@ label {
 }
 
 select {
-  padding: 16px 20px;
-  border: none;
+  appearance: none;
   background-color: transparent;
-  color: black;
-  font-size: 1rem;
+  border: none;
+  margin-left: 20px;
+  width: 25%;
+  font-size: 2rem;
+  color: gray;
+  font-family: inherit;
+  cursor: pointer;
+  line-height: inherit;
   text-align: center;
 }
