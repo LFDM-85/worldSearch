@@ -29,9 +29,13 @@
 
 .searchpage {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  justify-items: center;
+  position: relative;
+  z-index: 1;
+  top: 0;
   left: 260px;
+  right: -260px;
 
   overflow-x: hidden;
-  position: relative;
 }
