@@ -31,32 +31,36 @@ const SearchPage = () => {
     setDropdownValue(() => event.target.value);
   };
 
+  const listCountry = (
+    <div className="listcountry">
+      {isLoading && <p className="loading">Loading...</p>}
+
+      {!isLoading &&
+        countries
+          .filter(
+            (country: any) =>
+              (country["continents"].includes(dropdownValue) &&
+                country["name"]["common"].includes(searchValue)) ||
+              (country["continents"].includes(dropdownValue) && !searchValue)
+          )
+          .map((country) => {
+            return (
+              <CountryCard
+                flag={country["flags"]["png"]}
+                countryname={country["name"]["common"]}
+                key={Math.random()}
+              />
+            );
+          })}
+    </div>
+  );
+
   return (
     <div>
       <h1 className="title-searchPage">Word Search</h1>
       <Dropdown dropHandler={dropdownFilterHandler} />
       <SearchBar searchValueHandler={filterHandler} value={searchValue} />
-      <div className="listcountry">
-        {isLoading && <p className="loading">Loading...</p>}
-
-        {!isLoading &&
-          countries
-            .filter(
-              (country: any) =>
-                (country["continents"].includes(dropdownValue) &&
-                  country["name"]["common"].includes(searchValue)) ||
-                (country["continents"].includes(dropdownValue) && !searchValue)
-            )
-            .map((country) => {
-              return (
-                <CountryCard
-                  flag={country["flags"]["png"]}
-                  countryname={country["name"]["common"]}
-                  key={Math.random()}
-                />
-              );
-            })}
-      </div>
+      {listCountry}
     </div>
   );
 };
