@@ -8,13 +8,17 @@ import { useState, useEffect } from "react";
 const SearchPage = () => {
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const fetchData = () => setIsLoading(true);
-  fetch("https://restcountries.com/v3.1/all")
-    .then((response) => response.json())
-    .then((data) => {
-      setIsLoading(false);
-      return setCountries(data);
-    });
+  const fetchData = () =>
+    fetch("https://restcountries.com/v3.1/all")
+      .then((response) => {
+        setIsLoading(true);
+
+        return response.json();
+      })
+      .then((data) => {
+        setIsLoading(false);
+        return setCountries(data);
+      });
 
   useEffect(() => {
     fetchData();
