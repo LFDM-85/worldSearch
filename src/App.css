@@ -28,14 +28,9 @@
 }
 
 .searchpage {
+  padding-left: 260px;
   display: flex;
-  justify-content: space-around;
-  justify-items: center;
-  position: relative;
-  z-index: 1;
-  top: 0;
-  left: 260px;
-  right: -260px;
+  justify-content: space-between;
 
   overflow-x: hidden;
 }

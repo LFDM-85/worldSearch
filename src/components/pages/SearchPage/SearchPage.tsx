@@ -31,8 +31,6 @@ const SearchPage = () => {
     setDropdownValue(() => event.target.value);
   };
 
-  console.log(dropdownValue);
-
   return (
     <div>
       <h1 className="title-searchPage">Word Search</h1>
