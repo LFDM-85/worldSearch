@@ -1,31 +1,21 @@
-import { useState } from "react";
-
 import "./SearchBar.css";
 
 // TODO
 // view correct types
 
-const SearchPage = () => {
-  const [searchValue, setSearchValue] = useState("");
-
-  const searchValueHandler = (event: any) => {
-    setSearchValue(() => event.target.value);
-  };
-
-  console.log(searchValue);
-
+const SearchPage = (props: any) => {
   return (
     <div>
-      <form>
+      <div>
         <input
           type="text"
           className="input"
           placeholder="Type A Country"
-          onChange={searchValueHandler}
-          value={searchValue}
+          onChange={props.filterHandler}
+          value={props.searchValue}
         />
         {/* {!enteredContinentHasError && <p>Wrong Continent Name</p>} */}
-      </form>
+      </div>
     </div>
   );
 };
