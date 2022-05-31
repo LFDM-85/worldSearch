@@ -11,7 +11,7 @@ const SearchPage = (props: any) => {
           type="text"
           className="input"
           placeholder="Type A Country"
-          onChange={props.filterHandler}
+          onChange={props.searchValueHandler}
           value={props.searchValue}
         />
         {/* {!enteredContinentHasError && <p>Wrong Continent Name</p>} */}

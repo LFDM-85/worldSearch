@@ -6,59 +6,56 @@ import { useState, useEffect } from "react";
 
 const SearchPage = () => {
   const [searchValue, setSearchValue] = useState("");
+  const [dropdownValue, setDropdownValue] = useState("all");
   const [countries, setCountries] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const fetchData = () =>
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => {
-        setIsLoading(true);
-
         return response.json();
       })
       .then((data) => {
         setIsLoading(false);
-        return setCountries(data);
+        setCountries(data);
       });
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  let fetchedcountries = countries.map((place) => place);
-
   const filterHandler = (event: any) => {
     setSearchValue(() => event.target.value);
-    if (searchValue) {
-      fetchedcountries = countries
-        .filter((country: any, index: number) =>
-          country[index]["name"].includes(searchValue)
-        )
-        .map((place) => place);
-    }
-    console.log(searchValue);
-    return fetchedcountries;
   };
 
-  console.log(fetchedcountries);
+  const dropdownFilterHandler = (event: any) => {
+    setDropdownValue(() => event.target.value);
+  };
+
+  console.log(dropdownValue);
 
   return (
     <div>
       <h1 className="title-searchPage">Word Search</h1>
-      <Dropdown />
+      <Dropdown dropHandler={dropdownFilterHandler} />
       <SearchBar searchValueHandler={filterHandler} value={searchValue} />
       <div className="listcountry">
         {isLoading && <p className="loading">Loading...</p>}
 
         {!isLoading &&
-          fetchedcountries.map((country) => {
-            return (
-              <CountryCard
-                flag={country["flags"]["png"]}
-                countryname={country["name"]["common"]}
-                key={Math.random()}
-              />
-            );
-          })}
+          countries
+            .filter(
+              (country: any) =>
+                country["name"]["common"].includes(searchValue) || !searchValue
+            )
+            .map((country) => {
+              return (
+                <CountryCard
+                  flag={country["flags"]["png"]}
+                  countryname={country["name"]["common"]}
+                  key={Math.random()}
+                />
+              );
+            })}
       </div>
     </div>
   );
