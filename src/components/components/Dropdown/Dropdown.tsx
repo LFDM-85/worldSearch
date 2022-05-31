@@ -7,18 +7,18 @@ const Dropdown = (props: any) => {
       <select
         name="continents"
         id="continents"
-        defaultValue="all"
+        defaultValue="select"
         onChange={props.dropHandler}
         value={props.dropdownValue}
       >
-        <option value="all">All</option>
-        <option value="africa">Africa</option>
-        <option value="antarctica">Antarctica</option>
-        <option value="asia">Asia</option>
-        <option value="europe">Europe</option>
-        <option value="oceania">Oceania</option>
-        <option value="namerica">North America</option>
-        <option value="samerica">South America</option>
+        <option value="select">Select...</option>
+        <option value="Africa">Africa</option>
+        <option value="Antarctica">Antarctica</option>
+        <option value="Asia">Asia</option>
+        <option value="Europe">Europe</option>
+        <option value="Oceania">Oceania</option>
+        <option value="North America">North America</option>
+        <option value="South America">South America</option>
       </select>
     </div>
   );

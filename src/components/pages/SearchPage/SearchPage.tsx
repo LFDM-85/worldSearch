@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 
 const SearchPage = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [dropdownValue, setDropdownValue] = useState("all");
+  const [dropdownValue, setDropdownValue] = useState("select");
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const fetchData = () =>
@@ -45,7 +45,9 @@ const SearchPage = () => {
           countries
             .filter(
               (country: any) =>
-                country["name"]["common"].includes(searchValue) || !searchValue
+                (country["continents"].includes(dropdownValue) &&
+                  country["name"]["common"].includes(searchValue)) ||
+                (country["continents"].includes(dropdownValue) && !searchValue)
             )
             .map((country) => {
               return (
