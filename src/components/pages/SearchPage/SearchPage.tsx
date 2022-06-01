@@ -1,21 +1,26 @@
+import { useState, useEffect } from "react";
+
 import Dropdown from "../../components/Dropdown/Dropdown";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import "./SearchPage.css";
 import CountryCard from "../../components/CountryCard/CountryCard";
-import { useState, useEffect } from "react";
+import CountryPage from "../ContryPage/CountryPage";
+
+import "./SearchPage.css";
 
 const SearchPage = () => {
   const [searchValue, setSearchValue] = useState("");
-  const [dropdownValue, setDropdownValue] = useState("select");
+  const [dropdownValue, setDropdownValue] = useState("");
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [countryIsCliked, setCountyIsCliked] = useState(false);
+
   const fetchData = () =>
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        setIsLoading(false);
+        setIsLoading(false); // View two sets countries
         setCountries(data);
       });
 
@@ -29,6 +34,14 @@ const SearchPage = () => {
 
   const dropdownFilterHandler = (event: any) => {
     setDropdownValue(() => event.target.value);
+  };
+
+  const loadCountryInfo = () => {
+    setCountyIsCliked(true);
+  };
+
+  const unLoadCountryInfo = () => {
+    setCountyIsCliked(false);
   };
 
   const listCountry = (
@@ -46,9 +59,9 @@ const SearchPage = () => {
           .map((country) => {
             return (
               <CountryCard
-                flag={country["flags"]["png"]}
-                countryname={country["name"]["common"]}
-                key={Math.random()}
+                country={country}
+                loadCountry={() => loadCountryInfo()}
+                key={country["name"]["common"]}
               />
             );
           })}
@@ -58,9 +71,12 @@ const SearchPage = () => {
   return (
     <div>
       <h1 className="title-searchPage">Word Search</h1>
-      <Dropdown dropHandler={dropdownFilterHandler} />
-      <SearchBar searchValueHandler={filterHandler} value={searchValue} />
-      {listCountry}
+      {countryIsCliked || <Dropdown dropHandler={dropdownFilterHandler} />}
+      {countryIsCliked || (
+        <SearchBar searchValueHandler={filterHandler} value={searchValue} />
+      )}
+      {countryIsCliked || <div>{listCountry} </div>}
+      {countryIsCliked && <CountryPage unLoadCountry={unLoadCountryInfo} />}
     </div>
   );
 };

@@ -14,7 +14,6 @@ const SearchPage = (props: any) => {
           onChange={props.searchValueHandler}
           value={props.searchValue}
         />
-        {/* {!enteredContinentHasError && <p>Wrong Continent Name</p>} */}
       </div>
     </div>
   );
