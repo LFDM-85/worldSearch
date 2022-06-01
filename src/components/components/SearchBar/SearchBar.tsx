@@ -3,7 +3,7 @@ import "./SearchBar.css";
 // TODO
 // view correct types
 
-const SearchPage = (props: any) => {
+const SearchBar = (props: any) => {
   return (
     <div>
       <div>
@@ -19,4 +19,4 @@ const SearchPage = (props: any) => {
   );
 };
 
-export default SearchPage;
+export default SearchBar;

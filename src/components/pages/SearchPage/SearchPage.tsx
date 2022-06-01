@@ -12,7 +12,8 @@ const SearchPage = () => {
   const [dropdownValue, setDropdownValue] = useState("");
   const [countries, setCountries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [countryIsCliked, setCountyIsCliked] = useState(false);
+  const [countryIsLoaded, setCountyIsLoaded] = useState();
+  const [countryIsClicked, setCountyIsClicked] = useState(false);
 
   const fetchData = () =>
     fetch("https://restcountries.com/v3.1/all")
@@ -36,12 +37,15 @@ const SearchPage = () => {
     setDropdownValue(() => event.target.value);
   };
 
-  const loadCountryInfo = () => {
-    setCountyIsCliked(true);
+  const loadCountryInfo = (country: any) => {
+    setCountyIsClicked(true);
+    setCountyIsLoaded(() => country);
   };
 
-  const unLoadCountryInfo = () => {
-    setCountyIsCliked(false);
+  console.log(countryIsLoaded);
+
+  const unLoadCountryInfo = (country: any) => {
+    setCountyIsClicked(false);
   };
 
   const listCountry = (
@@ -60,7 +64,7 @@ const SearchPage = () => {
             return (
               <CountryCard
                 country={country}
-                loadCountry={() => loadCountryInfo()}
+                loadCountry={() => loadCountryInfo(country)}
                 key={country["name"]["common"]}
               />
             );
@@ -71,12 +75,17 @@ const SearchPage = () => {
   return (
     <div>
       <h1 className="title-searchPage">Word Search</h1>
-      {countryIsCliked || <Dropdown dropHandler={dropdownFilterHandler} />}
-      {countryIsCliked || (
+      {countryIsClicked || <Dropdown dropHandler={dropdownFilterHandler} />}
+      {countryIsClicked || (
         <SearchBar searchValueHandler={filterHandler} value={searchValue} />
       )}
-      {countryIsCliked || <div>{listCountry} </div>}
-      {countryIsCliked && <CountryPage unLoadCountry={unLoadCountryInfo} />}
+      {countryIsClicked || <div>{listCountry} </div>}
+      {countryIsClicked && (
+        <CountryPage
+          countryInfo={countryIsLoaded}
+          unLoadCountry={unLoadCountryInfo}
+        />
+      )}
     </div>
   );
 };
