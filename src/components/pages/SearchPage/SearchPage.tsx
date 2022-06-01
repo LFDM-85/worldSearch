@@ -44,6 +44,8 @@ const SearchPage = () => {
 
   const unLoadCountryInfo = (country: any) => {
     setCountyIsClicked(false);
+    setSearchValue(() => "");
+    setDropdownValue(() => "");
   };
 
   const listCountry = (

@@ -2,12 +2,9 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import "./CountryPage.css";
 
-//TODO
-// Add map
-
 const CountryPage = ({ countryInfo, unLoadCountry }: any) => {
   return (
-    <div>
+    <>
       <button className="backbutton" onClick={unLoadCountry}>
         &#128281;
       </button>
@@ -20,6 +17,7 @@ const CountryPage = ({ countryInfo, unLoadCountry }: any) => {
             alt="flag"
           />
           <p className="countryNameCard">{countryInfo.name.common}</p>
+          <button className="add-buttonInfo"> &#128278;</button>
           <div className="infodetails">
             <p className="countryNameCard">
               Population: {countryInfo.population}
@@ -56,7 +54,7 @@ const CountryPage = ({ countryInfo, unLoadCountry }: any) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

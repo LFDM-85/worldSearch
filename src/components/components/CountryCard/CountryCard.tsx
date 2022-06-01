@@ -9,7 +9,6 @@ const CountryCard = (props: any) => {
         alt="flag"
       />
       <p className="countryNameCard">{props.country["name"]["common"]}</p>
-      <button> &#128278;</button>
       <button onClick={props.loadCountry}>&#x1F50D;</button>
     </div>
   );
