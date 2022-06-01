@@ -1,3 +1,18 @@
+.countrycardInfo {
+  border: 7px solid rgb(187, 187, 187);
+  margin: 10px;
+  color: rgb(66, 66, 66);
+  background-color: rgb(187, 187, 187);
+  font-weight: bold;
+  font-size: larger;
+  text-align: center;
+  padding-bottom: 10px;
+}
+.countryflagInfo {
+  width: 355px;
+  height: 250px;
+}
+
 .backbutton {
   padding: 5px 20px;
   font-size: 2.5rem;

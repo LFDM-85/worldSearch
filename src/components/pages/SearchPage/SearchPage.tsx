@@ -42,8 +42,6 @@ const SearchPage = () => {
     setCountyIsLoaded(() => country);
   };
 
-  console.log(countryIsLoaded);
-
   const unLoadCountryInfo = (country: any) => {
     setCountyIsClicked(false);
   };
