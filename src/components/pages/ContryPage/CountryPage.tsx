@@ -1,3 +1,5 @@
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+
 import "./CountryPage.css";
 
 //TODO
@@ -28,6 +30,29 @@ const CountryPage = ({ countryInfo, unLoadCountry }: any) => {
               Coordenates (lat, lng): {countryInfo.latlng[0].toFixed(3)},{" "}
               {countryInfo.latlng[1].toFixed(3)}
             </p>
+            <div>
+              <MapContainer
+                center={[
+                  countryInfo.latlng[0].toFixed(3),
+                  countryInfo.latlng[1].toFixed(3),
+                ]}
+                zoom={5}
+                scrollWheelZoom={false}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker
+                  position={[
+                    countryInfo.latlng[0].toFixed(3),
+                    countryInfo.latlng[1].toFixed(3),
+                  ]}
+                >
+                  <Popup>{countryInfo.name.common}</Popup>
+                </Marker>
+              </MapContainer>
+            </div>
           </div>
         </div>
       </div>

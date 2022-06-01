@@ -71,7 +71,7 @@ const SearchPage = () => {
   );
 
   return (
-    <div>
+    <div className="searchPage">
       <h1 className="title-searchPage">Word Search</h1>
       {countryIsClicked || <Dropdown dropHandler={dropdownFilterHandler} />}
       {countryIsClicked || (

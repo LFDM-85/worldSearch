@@ -1,3 +1,12 @@
+.searchPage {
+  display: flex;
+  /* justify-content: space-between; */
+  flex-direction: column;
+  width: 100vw;
+  align-items: center;
+  align-content: center;
+}
+
 .title-searchPage {
   color: white;
   font-size: 3rem;

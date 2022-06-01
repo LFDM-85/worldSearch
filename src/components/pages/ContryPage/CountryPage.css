@@ -10,7 +10,7 @@
 }
 .countryflagInfo {
   width: 355px;
-  height: 250px;
+  height: 200px;
 }
 
 .backbutton {
@@ -19,4 +19,9 @@
   border: none;
   border-radius: 10px;
   margin: 10px;
+}
+
+.leaflet-container {
+  width: 355px;
+  height: 280px;
 }
