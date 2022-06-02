@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 import Dropdown from "../../components/Dropdown/Dropdown";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -7,11 +7,10 @@ import CountryPage from "../ContryPage/CountryPage";
 
 import "./SearchPage.css";
 
-const SearchPage = () => {
+const SearchPage: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [dropdownValue, setDropdownValue] = useState("");
-  const [countries, setCountries] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [countries, setCountries] = useState<[]>([]);
   const [countryIsLoaded, setCountyIsLoaded] = useState();
   const [countryIsClicked, setCountyIsClicked] = useState(false);
 
@@ -21,7 +20,6 @@ const SearchPage = () => {
         return response.json();
       })
       .then((data) => {
-        setIsLoading(false); // View two sets countries
         setCountries(data);
       });
 
@@ -29,11 +27,13 @@ const SearchPage = () => {
     fetchData();
   }, []);
 
-  const filterHandler = (event: any) => {
+  const filterHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(() => event.target.value);
   };
 
-  const dropdownFilterHandler = (event: any) => {
+  const dropdownFilterHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setDropdownValue(() => event.target.value);
   };
 
@@ -42,7 +42,7 @@ const SearchPage = () => {
     setCountyIsLoaded(() => country);
   };
 
-  const unLoadCountryInfo = (country: any) => {
+  const unLoadCountryInfo = () => {
     setCountyIsClicked(false);
     setSearchValue(() => "");
     setDropdownValue(() => "");
@@ -50,17 +50,17 @@ const SearchPage = () => {
 
   const listCountry = (
     <div className="listcountry">
-      {isLoading && <p className="loading">Loading...</p>}
+      {!countries && <p className="loading">Loading...</p>}
 
-      {!isLoading &&
+      {countries &&
         countries
           .filter(
-            (country: any) =>
+            (country: Country) =>
               (country["continents"].includes(dropdownValue) &&
                 country["name"]["common"].includes(searchValue)) ||
               (country["continents"].includes(dropdownValue) && !searchValue)
           )
-          .map((country) => {
+          .map((country: Country) => {
             return (
               <CountryCard
                 country={country}
@@ -74,7 +74,7 @@ const SearchPage = () => {
 
   return (
     <div className="searchPage">
-      <h1 className="title-searchPage">Word Search</h1>
+      {countryIsClicked || <h1 className="title-searchPage">Word Search</h1>}
       {countryIsClicked || <Dropdown dropHandler={dropdownFilterHandler} />}
       {countryIsClicked || (
         <SearchBar searchValueHandler={filterHandler} value={searchValue} />

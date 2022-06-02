@@ -1,15 +1,16 @@
 import "./CountryCard.css";
 
-const CountryCard = (props: any) => {
+interface Props {
+  country: Country;
+  loadCountry: () => void;
+}
+
+const CountryCard: React.FC<Props> = ({ country, loadCountry }) => {
   return (
     <div className="countrycard">
-      <img
-        className="countryflag"
-        src={props.country["flags"]["png"]}
-        alt="flag"
-      />
-      <p className="countryNameCard">{props.country["name"]["common"]}</p>
-      <button onClick={props.loadCountry}>&#x1F50D;</button>
+      <img className="countryflag" src={country["flags"]["png"]} alt="flag" />
+      <p className="countryNameCard">{country["name"]["common"]}</p>
+      <button onClick={loadCountry}>&#x1F50D;</button>
     </div>
   );
 };

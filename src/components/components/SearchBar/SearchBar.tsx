@@ -3,7 +3,12 @@ import "./SearchBar.css";
 // TODO
 // view correct types
 
-const SearchBar = (props: any) => {
+interface Props {
+  searchValueHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+}
+
+const SearchBar: React.FC<Props> = (props) => {
   return (
     <div>
       <div>
@@ -12,7 +17,7 @@ const SearchBar = (props: any) => {
           className="input"
           placeholder="Type A Country"
           onChange={props.searchValueHandler}
-          value={props.searchValue}
+          value={props.value}
         />
       </div>
     </div>
