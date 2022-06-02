@@ -1,4 +1,5 @@
 interface Country {
+  id: number;
   capital: string[];
   area: number;
   continents: string[];
@@ -28,7 +29,7 @@ type LoadCountry = {
   loadCountry: () => void;
 };
 type CountryState = {
-  country: Country;
+  countries: Country[];
 };
 type CountryAction = {
   type: string;
