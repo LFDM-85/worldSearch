@@ -1,0 +1,17 @@
+.countrycardSideBar {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.countryflagSideBar {
+  width: 240px;
+  height: 150px;
+}
+
+.countryNameCardSideBar {
+  font-weight: bold;
+}
+.deletecountry {
+  font-size: 1.25rem;
+}

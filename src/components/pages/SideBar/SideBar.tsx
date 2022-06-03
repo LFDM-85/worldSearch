@@ -18,16 +18,21 @@ const SideBar = () => {
   };
 
   return (
-    <div>
+    <div className="favorites">
       <h1>Favorites &#128278;</h1>
       <div className="fav-searchbar">
         <SearchBar searchValueHandler={filterHandler} value={searchValue} />
       </div>
       <hr />
-      <div>List of Countries</div>
-      {countries.map((country: Country) => (
-        <CountryCardSideBar removeCountry={removeCountry} country={country} />
-      ))}
+      <h2>List of Countries</h2>
+      {countries
+        .filter(
+          (country: Country) =>
+            country["name"]["common"].includes(searchValue) || !searchValue
+        )
+        .map((country: Country) => (
+          <CountryCardSideBar removeCountry={removeCountry} country={country} />
+        ))}
     </div>
   );
 };
