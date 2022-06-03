@@ -1,4 +1,5 @@
 import CountryCard from "../../components/CountryCard/CountryCard";
+import "./ListCountry.css";
 
 interface Props {
   countries: Country[];
