@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import Dropdown from "../../components/Dropdown/Dropdown";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import CountryCard from "../../components/CountryCard/CountryCard";
+// import CountryCard from "../../components/CountryCard/CountryCard";
 import CountryPage from "../ContryPage/CountryPage";
 import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
 import { addCountry } from "../../../store/actionCreators";
 
 import "./SearchPage.css";
+import ListCountry from "../../components/ListCountry/ListCountry";
 
 const SearchPage: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -46,30 +47,6 @@ const SearchPage: React.FC = () => {
     [dispatch]
   );
 
-  const listCountry = (
-    <div className="listcountry">
-      {!countries && <p className="loading">Loading...</p>}
-
-      {countries &&
-        countries
-          .filter(
-            (country: Country) =>
-              (country["continents"].includes(dropdownValue) &&
-                country["name"]["common"].includes(searchValue)) ||
-              (country["continents"].includes(dropdownValue) && !searchValue)
-          )
-          .map((country: Country) => {
-            return (
-              <CountryCard
-                country={country}
-                loadCountry={() => loadCountryInfo(country)}
-                key={country["name"]["common"]}
-              />
-            );
-          })}
-    </div>
-  );
-
   const loadCountryInfo = (country: any) => {
     setCountryIsClicked(true);
     setCountryIsLoaded(() => country);
@@ -88,7 +65,14 @@ const SearchPage: React.FC = () => {
       {countryIsClicked || (
         <SearchBar searchValueHandler={filterHandler} value={searchValue} />
       )}
-      {countryIsClicked || <div>{listCountry} </div>}
+      {countryIsClicked || (
+        <ListCountry
+          countries={countries}
+          dropdownValue={dropdownValue}
+          searchValue={searchValue}
+          loadCountryInfo={loadCountryInfo}
+        />
+      )}
       {countryIsClicked && (
         <CountryPage
           saveCountry={saveCountry}

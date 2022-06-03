@@ -1,5 +1,5 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useSelector } from "react-redux";
+import Map from "../../components/Map/Map";
 
 import "./CountryPage.css";
 
@@ -65,21 +65,7 @@ const CountryPage: React.FC<Props> = ({
               Coordenates (lat, lng): {countryInfo?.latlng[0].toFixed(3)},{" "}
               {countryInfo?.latlng[1].toFixed(3)}
             </p>
-            <div>
-              <MapContainer
-                center={[lat, lng]}
-                zoom={5}
-                scrollWheelZoom={false}
-              >
-                <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <Marker position={[lat, lng]}>
-                  <Popup>{countryInfo?.name.common}</Popup>
-                </Marker>
-              </MapContainer>
-            </div>
+            <Map lat={lat} lng={lng} countryInfo={countryInfo} />
           </div>
         </div>
       </div>
