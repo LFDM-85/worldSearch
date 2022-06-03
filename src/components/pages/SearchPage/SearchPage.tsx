@@ -4,6 +4,9 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import CountryCard from "../../components/CountryCard/CountryCard";
 import CountryPage from "../ContryPage/CountryPage";
+import { Dispatch } from "redux";
+import { useDispatch } from "react-redux";
+import { addCountry } from "../../../store/actionCreators";
 
 import "./SearchPage.css";
 
@@ -13,6 +16,7 @@ const SearchPage: React.FC = () => {
   const [countries, setCountries] = useState<[]>([]);
   const [countryIsLoaded, setCountyIsLoaded] = useState();
   const [countryIsClicked, setCountyIsClicked] = useState(false);
+  const dispatch: Dispatch<any> = useDispatch();
 
   const fetchData = () =>
     fetch("https://restcountries.com/v3.1/all")
@@ -72,6 +76,11 @@ const SearchPage: React.FC = () => {
     </div>
   );
 
+  const saveCountry = React.useCallback(
+    (country: Country) => dispatch(addCountry(country)),
+    [dispatch]
+  );
+
   return (
     <div className="searchPage">
       {countryIsClicked || <h1 className="title-searchPage">Word Search</h1>}
@@ -82,6 +91,7 @@ const SearchPage: React.FC = () => {
       {countryIsClicked || <div>{listCountry} </div>}
       {countryIsClicked && (
         <CountryPage
+          saveCountry={saveCountry}
           countryInfo={countryIsLoaded}
           unLoadCountry={unLoadCountryInfo}
         />

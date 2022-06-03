@@ -1,15 +1,26 @@
+import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 import "./CountryPage.css";
 
 interface Props {
   countryInfo: Country | undefined;
+  saveCountry: (country: Country | any) => void;
   unLoadCountry: () => void;
 }
 
-const CountryPage: React.FC<Props> = ({ countryInfo, unLoadCountry }) => {
+const CountryPage: React.FC<Props> = ({
+  countryInfo,
+  unLoadCountry,
+  saveCountry,
+}) => {
   const lat = Number(countryInfo?.latlng[0].toFixed(3));
   const lng = Number(countryInfo?.latlng[1].toFixed(3));
+
+  const addNewCountry = () => {
+    saveCountry(countryInfo);
+  };
+
   return (
     <>
       <button className="backbutton" onClick={unLoadCountry}>
@@ -24,7 +35,10 @@ const CountryPage: React.FC<Props> = ({ countryInfo, unLoadCountry }) => {
             alt="flag"
           />
           <p className="countryNameCard">{countryInfo?.name.common}</p>
-          <button className="add-buttonInfo"> &#128278;</button>
+          <button className="add-buttonInfo" onClick={addNewCountry}>
+            {" "}
+            &#128278;
+          </button>
           <div className="infodetails">
             <p className="countryNameCard">
               Population: {countryInfo?.population}

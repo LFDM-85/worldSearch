@@ -10,7 +10,7 @@ interface Country {
 }
 
 type ICountry = {
-  country: Country;
+  Icountry: Country[];
 };
 
 interface Flags {
