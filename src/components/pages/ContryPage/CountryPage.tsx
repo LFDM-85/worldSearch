@@ -1,10 +1,11 @@
-import React from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useSelector } from "react-redux";
 
 import "./CountryPage.css";
 
 interface Props {
   countryInfo: Country | undefined;
+
   saveCountry: (country: Country | any) => void;
   unLoadCountry: () => void;
 }
@@ -16,6 +17,20 @@ const CountryPage: React.FC<Props> = ({
 }) => {
   const lat = Number(countryInfo?.latlng[0].toFixed(3));
   const lng = Number(countryInfo?.latlng[1].toFixed(3));
+  // const [exists, setExists] = useState(false);
+
+  const countries: readonly Country[] = useSelector(
+    (state: CountryState) => state.countries
+  );
+
+  console.log(countries);
+
+  const exists =
+    countries !== undefined &&
+    countryInfo !== undefined &&
+    countries.some(
+      (country) => country.name.common === countryInfo.name.common!
+    );
 
   const addNewCountry = () => {
     saveCountry(countryInfo);
@@ -35,10 +50,13 @@ const CountryPage: React.FC<Props> = ({
             alt="flag"
           />
           <p className="countryNameCard">{countryInfo?.name.common}</p>
-          <button className="add-buttonInfo" onClick={addNewCountry}>
-            {" "}
-            &#128278;
-          </button>
+          {!exists && (
+            <button className="add-buttonInfo" onClick={addNewCountry}>
+              {" "}
+              &#128278;
+            </button>
+          )}
+
           <div className="infodetails">
             <p className="countryNameCard">
               Population: {countryInfo?.population}
