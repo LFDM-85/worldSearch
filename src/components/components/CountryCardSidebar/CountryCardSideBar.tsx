@@ -21,7 +21,9 @@ const CountryCardSideBar: React.FC<Props> = ({ country, removeCountry }) => {
         src={country["flags"]["png"]}
         alt="flag"
       />
-      <p className="countryNameCardSideBar">{country["name"]["common"]}</p>
+      <p className="countryNameCardSideBar">
+        {country.continents} / {country["name"]["common"]}
+      </p>
       <button className="deletecountry" onClick={() => deleteCountry(country)}>
         &#128465;
       </button>

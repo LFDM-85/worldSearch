@@ -14,8 +14,8 @@ const SearchPage: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [dropdownValue, setDropdownValue] = useState("");
   const [countries, setCountries] = useState<[]>([]);
-  const [countryIsLoaded, setCountyIsLoaded] = useState();
-  const [countryIsClicked, setCountyIsClicked] = useState(false);
+  const [countryIsLoaded, setCountryIsLoaded] = useState();
+  const [countryIsClicked, setCountryIsClicked] = useState(false);
   const dispatch: Dispatch<any> = useDispatch();
 
   const fetchData = () =>
@@ -42,12 +42,13 @@ const SearchPage: React.FC = () => {
   };
 
   const loadCountryInfo = (country: any) => {
-    setCountyIsClicked(true);
-    setCountyIsLoaded(() => country);
+    //TODO verify type
+    setCountryIsClicked(true);
+    setCountryIsLoaded(() => country);
   };
 
   const unLoadCountryInfo = () => {
-    setCountyIsClicked(false);
+    setCountryIsClicked(false);
     setSearchValue(() => "");
     setDropdownValue(() => "");
   };
