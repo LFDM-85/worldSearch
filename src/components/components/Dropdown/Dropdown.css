@@ -1,6 +1,6 @@
 label {
   color: White;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 select {
@@ -9,7 +9,7 @@ select {
   border: none;
   margin-left: 20px;
   width: 25%;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: gray;
   font-family: inherit;
   cursor: pointer;

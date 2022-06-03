@@ -31,7 +31,11 @@ const SideBar = () => {
             country["name"]["common"].includes(searchValue) || !searchValue
         )
         .map((country: Country) => (
-          <CountryCardSideBar removeCountry={removeCountry} country={country} />
+          <CountryCardSideBar
+            removeCountry={removeCountry}
+            country={country}
+            key={Math.random()}
+          />
         ))}
     </div>
   );

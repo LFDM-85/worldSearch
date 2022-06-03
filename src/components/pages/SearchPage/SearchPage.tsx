@@ -23,8 +23,8 @@ const SearchPage: React.FC = () => {
       .then((response) => {
         return response.json();
       })
-      .then((data) => {
-        setCountries(data);
+      .then((data: []) => {
+        setCountries(() => data);
       });
 
   useEffect(() => {
@@ -41,17 +41,10 @@ const SearchPage: React.FC = () => {
     setDropdownValue(() => event.target.value);
   };
 
-  const loadCountryInfo = (country: any) => {
-    //TODO verify type
-    setCountryIsClicked(true);
-    setCountryIsLoaded(() => country);
-  };
-
-  const unLoadCountryInfo = () => {
-    setCountryIsClicked(false);
-    setSearchValue(() => "");
-    setDropdownValue(() => "");
-  };
+  const saveCountry = React.useCallback(
+    (country: Country) => dispatch(addCountry(country)),
+    [dispatch]
+  );
 
   const listCountry = (
     <div className="listcountry">
@@ -77,10 +70,16 @@ const SearchPage: React.FC = () => {
     </div>
   );
 
-  const saveCountry = React.useCallback(
-    (country: Country) => dispatch(addCountry(country)),
-    [dispatch]
-  );
+  const loadCountryInfo = (country: any) => {
+    setCountryIsClicked(true);
+    setCountryIsLoaded(() => country);
+  };
+
+  const unLoadCountryInfo = () => {
+    setCountryIsClicked(false);
+    setSearchValue(() => "");
+    setDropdownValue(() => "");
+  };
 
   return (
     <div className="searchPage">

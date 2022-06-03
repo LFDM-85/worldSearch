@@ -21,9 +21,7 @@ interface Name {
   common: string;
 }
 
-type Data = {
-  data: Country[];
-};
+type Data = ICountry;
 
 type LoadCountry = {
   loadCountry: () => void;

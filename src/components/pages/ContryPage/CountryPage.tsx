@@ -23,8 +23,6 @@ const CountryPage: React.FC<Props> = ({
     (state: CountryState) => state.countries
   );
 
-  console.log(countries);
-
   const exists =
     countries !== undefined &&
     countryInfo !== undefined &&
