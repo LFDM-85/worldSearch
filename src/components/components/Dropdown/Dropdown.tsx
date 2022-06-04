@@ -1,15 +1,17 @@
 import "./Dropdown.css";
 
-const Dropdown = (props: any) => {
+//TODO Types
+
+const Dropdown = ({ selected, dropHandler, dropdownValue }: any) => {
   return (
     <div>
       <label htmlFor="continents">Select Continent:</label>
       <select
         name="continents"
         id="continents"
-        defaultValue={props.selected}
-        onChange={props.dropHandler}
-        value={props.dropdownValue}
+        defaultValue={selected}
+        onChange={dropHandler}
+        value={dropdownValue}
       >
         <option value="select">Select...</option>
         <option value="Africa">Africa</option>

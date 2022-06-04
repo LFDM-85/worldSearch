@@ -8,7 +8,7 @@ interface Props {
   value: string;
 }
 
-const SearchBar: React.FC<Props> = (props) => {
+const SearchBar: React.FC<Props> = ({ searchValueHandler, value }) => {
   return (
     <div>
       <div>
@@ -16,8 +16,8 @@ const SearchBar: React.FC<Props> = (props) => {
           type="text"
           className="input"
           placeholder="Type A Country"
-          onChange={props.searchValueHandler}
-          value={props.value}
+          onChange={searchValueHandler}
+          value={value}
         />
       </div>
     </div>
