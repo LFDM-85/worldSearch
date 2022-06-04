@@ -52,8 +52,8 @@ const SearchPage: React.FC = () => {
 
   const loadCountryInfo = (country: any) => {
     // TODO Types
-    setCountryIsLoaded(() => country);
     isCountryCliked.current = true;
+    setCountryIsLoaded(() => country);
   };
 
   const unLoadCountryInfo = () => {
