@@ -57,7 +57,7 @@ const SearchPage: React.FC = () => {
   };
 
   const unLoadCountryInfo = () => {
-    setSearchedValues({ searchValue: "", dropdownValue: "" });
+    setSearchedValues({ ...searchedValues });
     isCountryCliked.current = false;
   };
 
@@ -67,7 +67,10 @@ const SearchPage: React.FC = () => {
         <h1 className="title-searchPage">Word Search</h1>
       )}
       {isCountryCliked.current || (
-        <Dropdown dropHandler={dropdownFilterHandler} />
+        <Dropdown
+          dropHandler={dropdownFilterHandler}
+          selected={searchedValues.dropdownValue}
+        />
       )}
       {isCountryCliked.current || (
         <SearchBar

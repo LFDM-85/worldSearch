@@ -7,7 +7,7 @@ const Dropdown = (props: any) => {
       <select
         name="continents"
         id="continents"
-        defaultValue="select"
+        defaultValue={props.selected}
         onChange={props.dropHandler}
         value={props.dropdownValue}
       >
