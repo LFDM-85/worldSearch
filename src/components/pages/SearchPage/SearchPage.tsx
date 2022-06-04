@@ -11,8 +11,11 @@ import ListCountry from "../../components/ListCountry/ListCountry";
 import "./SearchPage.css";
 
 const SearchPage: React.FC = () => {
-  const [searchValue, setSearchValue] = useState("");
-  const [dropdownValue, setDropdownValue] = useState("");
+  const [searchedValues, setSearchedValues] = useState({
+    searchValue: "",
+    dropdownValue: "",
+  });
+
   const [countries, setCountries] = useState<[]>([]);
   const [countryIsLoaded, setCountryIsLoaded] = useState();
 
@@ -30,13 +33,16 @@ const SearchPage: React.FC = () => {
   }, []);
 
   const filterHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(() => event.target.value);
+    setSearchedValues({
+      ...searchedValues,
+      searchValue: event.target.value,
+    });
   };
 
   const dropdownFilterHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setDropdownValue(() => event.target.value);
+    setSearchedValues({ ...searchedValues, dropdownValue: event.target.value });
   };
 
   const saveCountry = React.useCallback(
@@ -51,8 +57,7 @@ const SearchPage: React.FC = () => {
   };
 
   const unLoadCountryInfo = () => {
-    setSearchValue(() => "");
-    setDropdownValue(() => "");
+    setSearchedValues({ searchValue: "", dropdownValue: "" });
     isCountryCliked.current = false;
   };
 
@@ -65,13 +70,16 @@ const SearchPage: React.FC = () => {
         <Dropdown dropHandler={dropdownFilterHandler} />
       )}
       {isCountryCliked.current || (
-        <SearchBar searchValueHandler={filterHandler} value={searchValue} />
+        <SearchBar
+          searchValueHandler={filterHandler}
+          value={searchedValues.searchValue}
+        />
       )}
       {isCountryCliked.current || (
         <ListCountry
           countries={countries}
-          dropdownValue={dropdownValue}
-          searchValue={searchValue}
+          dropdownValue={searchedValues.dropdownValue}
+          searchValue={searchedValues.searchValue}
           loadCountryInfo={loadCountryInfo}
         />
       )}
