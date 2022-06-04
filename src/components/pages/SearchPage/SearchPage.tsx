@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
-
-import Dropdown from "../../components/Dropdown/Dropdown";
-import SearchBar from "../../components/SearchBar/SearchBar";
-// import CountryCard from "../../components/CountryCard/CountryCard";
-import CountryPage from "../ContryPage/CountryPage";
+import React, { useState, useEffect, useRef } from "react";
 import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
 import { addCountry } from "../../../store/actionCreators";
 
-import "./SearchPage.css";
+import Dropdown from "../../components/Dropdown/Dropdown";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import CountryPage from "../ContryPage/CountryPage";
 import ListCountry from "../../components/ListCountry/ListCountry";
+
+import "./SearchPage.css";
 
 const SearchPage: React.FC = () => {
   const [searchValue, setSearchValue] = useState("");
   const [dropdownValue, setDropdownValue] = useState("");
   const [countries, setCountries] = useState<[]>([]);
   const [countryIsLoaded, setCountryIsLoaded] = useState();
-  const [countryIsClicked, setCountryIsClicked] = useState(false);
+
+  const isCountryCliked = useRef(false);
   const dispatch: Dispatch<any> = useDispatch();
 
-  const fetchData = () =>
+  useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => {
         return response.json();
@@ -27,9 +27,6 @@ const SearchPage: React.FC = () => {
       .then((data: []) => {
         setCountries(() => data);
       });
-
-  useEffect(() => {
-    fetchData();
   }, []);
 
   const filterHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,24 +45,30 @@ const SearchPage: React.FC = () => {
   );
 
   const loadCountryInfo = (country: any) => {
-    setCountryIsClicked(true);
+    // TODO Types
     setCountryIsLoaded(() => country);
+    console.log(country);
+    isCountryCliked.current = true;
   };
 
   const unLoadCountryInfo = () => {
-    setCountryIsClicked(false);
     setSearchValue(() => "");
     setDropdownValue(() => "");
+    isCountryCliked.current = false;
   };
 
   return (
     <div className="searchPage">
-      {countryIsClicked || <h1 className="title-searchPage">Word Search</h1>}
-      {countryIsClicked || <Dropdown dropHandler={dropdownFilterHandler} />}
-      {countryIsClicked || (
+      {isCountryCliked.current || (
+        <h1 className="title-searchPage">Word Search</h1>
+      )}
+      {isCountryCliked.current || (
+        <Dropdown dropHandler={dropdownFilterHandler} />
+      )}
+      {isCountryCliked.current || (
         <SearchBar searchValueHandler={filterHandler} value={searchValue} />
       )}
-      {countryIsClicked || (
+      {isCountryCliked.current || (
         <ListCountry
           countries={countries}
           dropdownValue={dropdownValue}
@@ -73,7 +76,7 @@ const SearchPage: React.FC = () => {
           loadCountryInfo={loadCountryInfo}
         />
       )}
-      {countryIsClicked && (
+      {isCountryCliked.current && (
         <CountryPage
           saveCountry={saveCountry}
           countryInfo={countryIsLoaded}

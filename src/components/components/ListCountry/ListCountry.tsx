@@ -5,7 +5,7 @@ interface Props {
   countries: Country[];
   dropdownValue: string;
   searchValue: string;
-  loadCountryInfo: (country: any) => void;
+  loadCountryInfo: (country: Country) => void;
 }
 
 const ListCountry: React.FC<Props> = ({
