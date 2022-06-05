@@ -15,11 +15,12 @@ const SearchPage: React.FC = () => {
     searchValue: "",
     dropdownValue: "",
   });
-
   const [countries, setCountries] = useState<[]>([]);
-  const [countryIsLoaded, setCountryIsLoaded] = useState();
 
+  //TODO state with object countryIsLoaded and isCountryCliked
+  const [countryIsLoaded, setCountryIsLoaded] = useState();
   const isCountryCliked = useRef(false);
+
   const dispatch: Dispatch<any> = useDispatch();
 
   useEffect(() => {
@@ -33,16 +34,17 @@ const SearchPage: React.FC = () => {
   }, []);
 
   const filterHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchedValues({
-      ...searchedValues,
-      searchValue: event.target.value,
+    setSearchedValues(() => {
+      return { ...searchedValues, searchValue: event.target.value };
     });
   };
 
   const dropdownFilterHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setSearchedValues({ ...searchedValues, dropdownValue: event.target.value });
+    setSearchedValues(() => {
+      return { ...searchedValues, dropdownValue: event.target.value };
+    });
   };
 
   const saveCountry = React.useCallback(
@@ -57,7 +59,10 @@ const SearchPage: React.FC = () => {
   };
 
   const unLoadCountryInfo = () => {
-    setSearchedValues({ ...searchedValues });
+    setSearchedValues(() => {
+      return { ...searchedValues };
+    });
+    setCountryIsLoaded(() => undefined);
     isCountryCliked.current = false;
   };
 
