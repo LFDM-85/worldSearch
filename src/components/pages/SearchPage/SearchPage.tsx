@@ -17,7 +17,7 @@ const SearchPage: React.FC = () => {
   });
   const [countries, setCountries] = useState<[]>([]);
 
-  //TODO state with object countryIsLoaded and isCountryCliked
+  //TODO state with object countryIsLoaded and isCountryCliked or with useRef
   const [countryIsLoaded, setCountryIsLoaded] = useState();
   const isCountryCliked = useRef(false);
 
