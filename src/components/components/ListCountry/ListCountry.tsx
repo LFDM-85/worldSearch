@@ -22,9 +22,9 @@ const ListCountry: React.FC<Props> = ({
         countries
           .filter(
             (country: Country) =>
-              (country["continents"].includes(dropdownValue) &&
-                country["name"]["common"].includes(searchValue)) ||
-              (country["continents"].includes(dropdownValue) && !searchValue)
+              (dropdownValue === "" ||
+                country["continents"].includes(dropdownValue)) &&
+              (!searchValue || country["name"]["common"].includes(searchValue))
           )
           .map((country: Country) => {
             return (

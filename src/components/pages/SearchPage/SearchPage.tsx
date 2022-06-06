@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Dispatch } from "redux";
 import { useDispatch } from "react-redux";
 import { addCountry } from "../../../store/actionCreators";
@@ -17,9 +17,7 @@ const SearchPage: React.FC = () => {
   });
   const [countries, setCountries] = useState<[]>([]);
 
-  //TODO state with object countryIsLoaded and isCountryCliked or with useRef
-  const [countryIsLoaded, setCountryIsLoaded] = useState();
-  const isCountryCliked = useRef(false);
+  const [countryIsLoaded, setCountryIsLoaded] = useState<Country>();
 
   const dispatch: Dispatch<any> = useDispatch();
 
@@ -40,7 +38,7 @@ const SearchPage: React.FC = () => {
   };
 
   const dropdownFilterHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setSearchedValues(() => {
       return { ...searchedValues, dropdownValue: event.target.value };
@@ -52,9 +50,7 @@ const SearchPage: React.FC = () => {
     [dispatch]
   );
 
-  const loadCountryInfo = (country: any) => {
-    // TODO Types
-    isCountryCliked.current = true;
+  const loadCountryInfo = (country: Country) => {
     setCountryIsLoaded(() => country);
   };
 
@@ -63,27 +59,25 @@ const SearchPage: React.FC = () => {
       return { ...searchedValues };
     });
     setCountryIsLoaded(() => undefined);
-    isCountryCliked.current = false;
   };
 
   return (
     <div className="searchPage">
-      {isCountryCliked.current || (
-        <h1 className="title-searchPage">Word Search</h1>
-      )}
-      {isCountryCliked.current || (
+      {!countryIsLoaded && <h1 className="title-searchPage">Word Search</h1>}
+      {!countryIsLoaded && (
         <Dropdown
           dropHandler={dropdownFilterHandler}
           selected={searchedValues.dropdownValue}
+          dropdownValue={searchedValues.dropdownValue}
         />
       )}
-      {isCountryCliked.current || (
+      {!countryIsLoaded && (
         <SearchBar
           searchValueHandler={filterHandler}
           value={searchedValues.searchValue}
         />
       )}
-      {isCountryCliked.current || (
+      {!countryIsLoaded && (
         <ListCountry
           countries={countries}
           dropdownValue={searchedValues.dropdownValue}
@@ -91,7 +85,7 @@ const SearchPage: React.FC = () => {
           loadCountryInfo={loadCountryInfo}
         />
       )}
-      {isCountryCliked.current && (
+      {countryIsLoaded && (
         <CountryPage
           saveCountry={saveCountry}
           countryInfo={countryIsLoaded}

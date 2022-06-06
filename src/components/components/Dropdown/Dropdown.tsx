@@ -1,8 +1,17 @@
+import React from "react";
 import "./Dropdown.css";
 
-//TODO Types
+interface Props {
+  selected: string;
+  dropHandler: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  dropdownValue: string;
+}
 
-const Dropdown = ({ selected, dropHandler, dropdownValue }: any) => {
+const Dropdown: React.FC<Props> = ({
+  selected,
+  dropHandler,
+  dropdownValue,
+}) => {
   return (
     <div>
       <label htmlFor="continents">Select Continent:</label>
@@ -13,7 +22,7 @@ const Dropdown = ({ selected, dropHandler, dropdownValue }: any) => {
         onChange={dropHandler}
         value={dropdownValue}
       >
-        <option value="select">Select...</option>
+        <option value="">Select...</option>
         <option value="Africa">Africa</option>
         <option value="Antarctica">Antarctica</option>
         <option value="Asia">Asia</option>

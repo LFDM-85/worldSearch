@@ -4,9 +4,9 @@ import Map from "../../components/Map/Map";
 import "./CountryPage.css";
 
 interface Props {
-  countryInfo: Country | undefined;
+  countryInfo: Country;
 
-  saveCountry: (country: Country | any) => void;
+  saveCountry: (country: Country) => void;
   unLoadCountry: () => void;
 }
 
@@ -25,7 +25,6 @@ const CountryPage: React.FC<Props> = ({
 
   const exists =
     countries !== undefined &&
-    countryInfo !== undefined &&
     countries.some(
       (country) => country.name.common === countryInfo.name.common!
     );
@@ -44,10 +43,10 @@ const CountryPage: React.FC<Props> = ({
         <div className="countrycardInfo">
           <img
             className="countryflagInfo"
-            src={countryInfo?.flags.png}
+            src={countryInfo.flags.png}
             alt="flag"
           />
-          <p className="countryNameCard">{countryInfo?.name.common}</p>
+          <p className="countryNameCard">{countryInfo.name.common}</p>
           {!exists && (
             <button className="add-buttonInfo" onClick={addNewCountry}>
               {" "}
@@ -59,11 +58,10 @@ const CountryPage: React.FC<Props> = ({
             <p className="countryNameCard">
               Population: {countryInfo?.population}
             </p>
-            <p className="countryNameCard">Capital: {countryInfo?.capital}</p>
-            <p className="countryNameCard">Area: {countryInfo?.area} km²</p>
+            <p className="countryNameCard">Capital: {countryInfo.capital}</p>
+            <p className="countryNameCard">Area: {countryInfo.area} km²</p>
             <p className="countryNameCard">
-              Coordenates (lat, lng): {countryInfo?.latlng[0].toFixed(3)},{" "}
-              {countryInfo?.latlng[1].toFixed(3)}
+              Coordenates (lat, lng): {lat},{lng}
             </p>
             <Map lat={lat} lng={lng} countryInfo={countryInfo} />
           </div>
